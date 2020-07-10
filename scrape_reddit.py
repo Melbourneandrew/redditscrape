@@ -67,6 +67,7 @@ def get_urls(subreddit,date,min_votes):
     reddit = praw.Reddit(client_secret = os.environ['REDDIT_API_SECRET'],
                      client_id = os.environ['REDDIT_API_ID'] ,
                      user_agent = 'gathering data script by /u/GougeC')
+    """ Reddit API has changed so I'm using .hot() to get images from the 'hot' section of the subreddit instead of searching by date and upvotes. Works just as well for my purpose (which is collecting memes)"""
     i = 0
     for post in reddit.subreddit(subreddit).hot():
         if post.ups >= min_votes:
@@ -112,7 +113,7 @@ if __name__ == '__main__':
     This allows this script to be called from the command line and get the images specified
     by the parameters put in.
     EX:
-    python gather_subreddit.py earthporn 1/1/2017 100
+    python scrape_reddit.py earthporn 1/1/2017 100
 
     would save every direct link image from r/earthporn that had over 100 upvotes.
 
